@@ -19,7 +19,7 @@ def findContour(clr_low, clr_high, hsv, out, cnv, clr):
                 cv2.drawContours(cnv, cn, -1, clr, -1)
                 #cv2.drawContours(out, cont, i, clr, -1)
 
-#WHAT
+
 while True:
     tr, frame = cap.read()
 
@@ -53,7 +53,8 @@ while True:
     
     cv2.imshow('paint', cnv)
     cv2.imshow('camera', frame)
-    #cnv[] -=1
+    cnv[ cnv > 2 ] -= 2
+    cnv[ cnv  > 0  ] -= 1
     key = cv2.waitKey(1)
     #print(key)
     if key == 27:
