@@ -14,11 +14,12 @@ def findContour(clr_low, clr_high, hsv, out, cnv, clr):
     cont = sorted(cont, key=cv2.contourArea, reverse=True)
     if len(cont)> 0:
         for i , cn in enumerate(cont):
-            if cv2.contourArea(cn) > 1000:
+            if cv2.contourArea(cn) > 500:
                 cv2.drawContours(out, cont, i, clr, 2)
-                cv2.drawContours(cnv, cn, -1, clr, -1) 
+                cv2.drawContours(cnv, cn, -1, clr, -1)
+                #cv2.drawContours(out, cont, i, clr, -1)
 
-
+#WHAT
 while True:
     tr, frame = cap.read()
 
@@ -26,20 +27,38 @@ while True:
     frame_ = cv2.blur(frame, (10,10) )
     frame_HSV = cv2.cvtColor( frame_, cv2.COLOR_BGR2HSV )
 
-    findContour( (0,190, 70), (15,255,255),
+    # red
+    findContour( (0,200, 70), (7,255,255),
                  frame_HSV, frame, cnv, (0,0,255))
-    findContour( (15,190, 70), (40,255,255),
+    # orange
+    findContour( (7,200, 70), (15,255,255),
+                 frame_HSV, frame, cnv, (0,100,250))
+    # yellow
+    findContour( (15,190, 70), (30,255,255),
                  frame_HSV, frame, cnv, (0,255,255))
-    #findContour( (0,190, 70), (15,255,255),
-    #             frame_HSV, frame, cnv, (0,0,255))
+    # light green
+    findContour( (30, 150, 40), (65,255,255),
+                 frame_HSV, frame, cnv, (50,255,100))
+    # green
+    findContour( (65, 140, 10), (90,255,255),
+                 frame_HSV, frame, cnv, (255,255,0))
+    # blue
+    findContour( (90, 120, 50), (140,255,255),
+                 frame_HSV, frame, cnv, (255,0,0))
+    #findContour( (15, 70, 50), (40,255,255),
+    #             frame_HSV, frame,frame, (255,0,0))
+    # purple
+    findContour( (150, 120, 20), (180,255,255),
+                 frame_HSV, frame, cnv, (200,0,100))
     
     cv2.imshow('paint', cnv)
     cv2.imshow('camera', frame)
-
+    #cnv[] -=1
     key = cv2.waitKey(1)
+    #print(key)
     if key == 27:
         break
-    if key == 113:
+    if key == 32:
         cnv = np.zeros( (480, 640, 3), dtype=np.uint8())
         
     
