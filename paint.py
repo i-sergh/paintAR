@@ -20,7 +20,6 @@ def findContour(clr_low, clr_high, hsv, out, cnv, clr):
     
     cont, h = cv2.findContours( mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE )
 
-    cont = sorted(cont, key=cv2.contourArea, reverse=True)
     if len(cont)> 0:
         for i , cn in enumerate(cont):
             if cv2.contourArea(cn) > 100:
