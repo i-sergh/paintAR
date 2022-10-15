@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 
 
-#cnv = np.zeros( (480, 640, 3), dtype=np.uint8())
 
 cap = cv2.VideoCapture(0)
 
